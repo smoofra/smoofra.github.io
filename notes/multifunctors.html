@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Multifunctors</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div class="main">
+
+<h1> Multifunctor means more than it's a functor in each argument.</h1>
+<p>
+    Let \( C \) and \( D \) be a categories.   A bifunctor from \(C\) to \(D\)
+    is defined as a functor from the product category:  \( F : C \times C \to D
+    \). Multifunctors are the obvious generalization.
+</p>
+<p>
+    In particular, this implies that for any fixed object \(X\),
+    \(F(X,-)\) and \(F(-,X)\) are functors.   But that is not sufficient
+    to define a bifunctor. Let \(f : A \to B \) and \(g : A' \to B' \)
+    be functors in \(C\).   The following diagram commutes in \(C \times C\),
+    because morphisms in the product category are defined as paris of morphisms.
+</p>
+
+<div>
+$$
+\begin{CD}
+(A,A') @>{1 \times g}>> (A,B')\\
+@V{f \times 1}VV @V{f \times 1}VV \\
+(B,A') @>{1 \times g}>> (B,B')
+\end{CD}
+$$
+</div>
+
+<p>So the image must commute in \(D\)</p>
+
+<div>
+$$
+\begin{CD}
+F(A,A') @>{F(1 \times g)}>> F(A,B')\\
+@V{F(f \times 1)}VV @V{F(f \times 1)}VV \\
+F(B,A') @>{F(1 \times g)}>> F(B,B')
+\end{CD}
+$$
+</div>
+
+$$ \newcommand{\catname}[1]{\text{#1}} $$
+
+But it's not sufficient that \(F\) be a functor in each argument to guarantee
+that this will be the case.
+
+<p> Here is a counterexample.   Let \(C\) be any
+nonabelian group \(G\), so \(C\) has one object and the morphisms are the
+group elements.<br>
+Let \(D = \catname{Set}\) <br>
+Let \( F(\cdot,\cdot) = G \) <br>
+For \(f,g \in G\) let \(F(f,g) : G \to G\) take \(x \mapsto fgx \)
+</p>
+
+For the image diagram above to commute, that would mean that for any \(f,g \in G\)
+we would have \( fg = gf \)
+
+</div>
+</body>
+</html>
