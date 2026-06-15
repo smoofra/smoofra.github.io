@@ -1,0 +1,208 @@
+---
+title: Why Is a Hermitian Product Defined That Way?
+---
+
+## What
+
+A Hermitian inner product is a generalization of an inner product for
+complex vector spaces.
+
+Like a normal inner product, it's a map:
+
+$$
+\langle \cdot , \cdot \rangle : V \times V \to V
+$$
+
+It's $\mathbb{R}$-linear on each argument.
+
+$$
+\begin{gathered}
+\langle u + v, w \rangle = \langle u, w \rangle + \langle v, w \rangle  \\
+\langle u, v + w \rangle = \langle u, v \rangle + \langle u, w \rangle
+\\
+\langle x u, v \rangle = x \langle u, v \rangle  = \langle u, x v \rangle
+\quad \text{for } x \in \mathbb{R}
+\end{gathered}
+$$
+
+And positive definite.
+
+$$
+\langle u, u \rangle > 0 \quad \text{for } u \neq 0
+$$
+
+But then the definition gets weird.   Instead of being symmetric, it's
+conjugate-symmetric, and only only $\mathbb{C}$-linear on the first argument.
+
+$$
+\begin{gathered}
+\langle z u, v \rangle = z \langle u, v \rangle  \quad \text{for } z \in \mathbb{C} \\
+\langle u, v \rangle = \overline{\langle v, u \rangle}
+\end{gathered}
+$$
+
+Usually, the only justification you'll get when this is introduced is to say that
+it has to be this way for the norm $\|v\|^2 = \langle v, v \rangle$ to be real,
+because if it were linear in each argument, you could multiply $v$ by $e^{i\theta/2}$
+and get any complex phase you want on $\|v\|^2$.
+
+This is true, but it still seems weird to me.  They say you'll get used to it.
+I got used to it, but for a long time, I still wished for some better justification
+than that.
+
+## Why
+
+All a Hermitian inner product is, is a real inner product, which is compatible with
+a complex structure.
+
+What do I mean by that?
+
+A complex vector space can be thought of as a real vector $V$ space with one additional
+bit of structure: a map  $J : V \to V$ such that $J^2 = -1$.   Then multiplication
+by a complex scalar is defined as:
+
+$$
+(a + bi)v = av + b Jv
+$$
+
+So, let's say we have a real vector space $V$ and we have two additional bits of
+structure:  A complex structure $J$, and a inner product $(\cdot, \cdot)$.
+The least you could ask for to say these two structures are "compatible" is that $J$ doesn't
+change the norm of a vector.
+$$
+\|Jv\| = \|v\|
+$$
+
+Well, if you have that, you have a Hermitian product, you just didn't know it yet.
+
+
+::: {#prp-j-preserves-inner-product}
+$(Ju, Jv) = (u, v)$ for any vectors $u, v$
+:::
+
+::: {.proof}
+$$
+\begin{align*}
+\|u + v\|^2 & = (u + v, u + v) = \|u\|^2 + 2(u,v) + \|v\|^2 \\
+= \|J(u + v)\|^2 & = (Ju + Jv, Ju + Jv) = \|Ju\|^2 + 2(Ju,Jv) + \|Jv\|^2 \\
+ &= \|u\|^2 + 2(Ju,Jv) + \|v\|^2
+\end{align*}
+$$
+:::
+
+
+::: {#prp-j-skew-adjoint}
+$(u, Jv) = -(Ju, v)$ for any vectors $u, v$
+:::
+
+::: {.proof}
+$$
+(u, Jv) = (Ju, JJv) = (Ju, -v) = -(Ju, v)
+$$
+:::
+
+
+::: {#prp-complex-norm}
+$\|zu\| = |z| \|u\|$ for any $z \in \mathbb{C}$
+:::
+
+::: {.proof}
+Let $z = a + bi$ for real $a, b$
+$$
+\begin{align*}
+\|zu\|^2 = (au + bJu, au + bJu) &= a^2\|u\|^2 + b^2\|u\|^2 + (au,bJu) + (bJu, au) \\
+&= a^2\|u\|^2 + b^2\|u\|^2 + \cancel{ab(u,Ju)} + \cancel{ab(Ju, u)} \\
+&= (a^2 + b^2) \|u\|^2 \\
+&= |z|^2 \|u\|^2
+\end{align*}
+$$
+:::
+
+Great! Now it almost looks like we have everything we could have wanted.
+We have a norm on our vector space, it's defined by a real-bilinear,
+positive-definite inner product.
+
+The product itself isn't complex-linear.  It's not even complex-valued.
+It's real valued on all inputs in our complex vector space.
+
+But why should it be complex valued?  The point of this thing is to define a 
+norm, right?  And norms are real.  And this norm responds to multiplication by 
+a complex factor in exactly the way we expect.  So maybe we don't need the
+Hermitian product at all.  Maybe this is a different, better way to
+generalize an inner product from real to complex spaces.
+
+Let's investigate the properties that this new kind of product has.
+
+I wonder what angle $u$ makes with $Ju$.  Well, $(u, Ju) = -(Ju, u)$ by
+@prp-j-skew-adjoint, but $(u, Ju) = (Ju, u)$ by symmetry.  So the product 
+is zero.  They're orthogonal.  I guess that makes sense.  After all, $1$ 
+and $i$ are orthogonal to each other on the complex plane.
+
+Still, it is a little bit odd.  That's not the way things work in the 
+Hermitian world, where $iu$ is parallel to $u$.
+
+We know what arbitrary complex scalars do to the norm, but what do they do 
+to the product in general?
+
+On the right
+$$
+(u,(a+bi)v) = a(u,v) + b(u,iv)
+$$
+
+On the left
+$$
+((a + bi)u,v) = a(u,v) + b(iu,v) = a(u,v) - b(u,iv)
+$$
+
+
+Interesting.  So if we just know $(u,v)$ and $(u,iv)$, we can calculate
+what any complex scalar does on either side.  It might make sense to keep 
+track of both of these together.   Let us define
+
+$$
+H(u,v) = \begin{pmatrix} (u,v) \\ (u,iv) \end{pmatrix}
+$$
+
+Now I suppose the natural question to ask, is what does a complex scalar 
+do do $H$?
+
+$$
+H((a+bi)u,v) = \begin{pmatrix} ((a+bi)u,v) \\ ((a+bi)u,iv) \end{pmatrix} = \begin{pmatrix} a(u,v) - b(u,iv) \\ b(u,v) + a(u,iv) \end{pmatrix} = \begin{pmatrix} a & -b \\ b & a \end{pmatrix} H(u,v)
+$$
+
+$$
+H(v, u) = \begin{pmatrix} (v,u) \\ (v,iu) \end{pmatrix} = \begin{pmatrix} (u,v) \\ -(u,iv) \end{pmatrix} = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix} H(u,v)
+$$
+
+*Oh.*
+
+$H$ isn't just two reals.  It's a complex number.  We can redefine it like this.
+
+$$
+H(u,v) = (u,v) + i(u,iv)
+$$
+
+And now we have
+$$
+\begin{gather*}
+H(zu,v) = zH(u,v) \\
+H(v,u) = \overline{H(u,v)}
+\end{gather*}
+$$
+
+$H$ is a Hermitian inner product.
+
+$H$ is a Hermitian inner product that defines the same norm as $(\cdot,\cdot)$.
+
+The imaginary part of $H$ encodes what $(u,v)$ does when you multiply $u$ or $v$ 
+by a complex scalar.
+
+$(u,v)$ is just the real part of $H(u,v)$.
+
+They both contain the same information, just expressed in different ways.
+
+They're the same thing.
+
+
+
+
