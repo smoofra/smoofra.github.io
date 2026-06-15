@@ -1,0 +1,51 @@
+---
+title: Multifunctors
+---
+
+## Multifunctor means more than it's a functor in each argument.
+
+Let $\mathcal{C}$ and $\mathcal{D}$ be categories.  A functor from the product category is 
+called a bifunctor.
+
+$$
+F : \mathcal{C} \times \mathcal{C} \to \mathcal{D}
+$$
+
+A multifunctor is a functor from a product category with any number of factors.
+
+For any fixed object $X$, $F(X,-)$ and $F(-,X)$ are functors. 
+But that is not sufficient to define a bifunctor. 
+Let $f : A \to B$ and $g : A' \to B'$ be morphisms in $\mathcal{C}$. The following diagram
+commutes in $\mathcal{C} \times \mathcal{C}$, because morphisms in the product category are defined
+as pairs of morphisms.
+
+$$
+\begin{array}{ccc}
+(A,A') & \xrightarrow{1 \times g} & (A,B') \\
+{\scriptstyle f \times 1}\downarrow & & \downarrow{\scriptstyle f \times 1} \\
+(B,A') & \xrightarrow{1 \times g} & (B,B')
+\end{array}
+$$
+
+So the image must commute in $\mathcal{D}$:
+
+$$
+\begin{array}{ccc}
+F(A,A') & \xrightarrow{F(1 \times g)} & F(A,B') \\
+{\scriptstyle F(f \times 1)}\downarrow & & \downarrow{\scriptstyle F(f \times 1)} \\
+F(B,A') & \xrightarrow{F(1 \times g)} & F(B,B')
+\end{array}
+$$
+
+But it's not sufficient that $F$ be a functor in each argument to guarantee
+that this will be the case.
+
+Here is a counterexample. Let $\mathcal{C}$ be any nonabelian group $G$, so $\mathcal{C}$ has one
+object and the morphisms are the group elements.
+
+- Let $\mathcal{D} = \text{Set}$
+- Let $F(\cdot,\cdot) = G$
+- For $f,g \in G$ let $F(f,g) : G \to G$ take $x \mapsto fgx$
+
+For the image diagram above to commute, that would mean that for any $f,g \in G$
+we would have $fg = gf$.

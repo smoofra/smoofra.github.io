@@ -1,0 +1,18 @@
+project:
+  type: website
+  output-dir: .
+
+website:
+  title: "Notes"
+  navbar:
+    title: "Notes"
+    left:
+      - href: index.qmd
+        text: Home
+
+format:
+  html:
+    theme: cosmo
+    html-math-method: katex
+    mermaid:
+      theme: default

@@ -1,0 +1,10 @@
+---
+title: "Notes"
+listing:
+  contents: "*.qmd"
+  type: table
+  fields: [title]
+  sort: "title asc"
+  sort-ui: false
+  filter-ui: false
+---
