@@ -1,13 +1,16 @@
 project:
   type: website
   output-dir: .
+  # Only the notes are Quarto sources; the top-level pages are hand-written HTML.
+  render:
+    - notes/*.qmd
 
 website:
   title: "Notes"
   navbar:
     title: "Notes"
     left:
-      - href: index.qmd
+      - href: notes/index.qmd
         text: Home
 
 format:
