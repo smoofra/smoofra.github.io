@@ -1,6 +1,7 @@
 project:
   type: website
   output-dir: .
+  pre-render: wkd.py
   # Only the notes are Quarto sources; the top-level pages are hand-written HTML.
   render:
     - notes/*.qmd
