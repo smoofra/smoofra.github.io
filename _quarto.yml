@@ -10,8 +10,11 @@ website:
   title: "Notes"
   navbar:
     title: "Notes"
+    # The title links to the site root by default, but the root is the
+    # hand-written home page, not the notes.
+    logo-href: /notes/index.html
     left:
-      - href: notes/index.qmd
+      - href: index.html
         text: Home
 
 format:
